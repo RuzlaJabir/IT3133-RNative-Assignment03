@@ -1,12 +1,47 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { StyleSheet } from "react-native";
+import { PaperProvider } from "react-native-paper";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+
+import Home from "./components/Home";
+import Login from "./components/Login";
 
 export default function App() {
+  const Stack = createNativeStackNavigator();
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <SafeAreaProvider>
+      <PaperProvider>
+        <NavigationContainer>
+          <Stack.Navigator
+          initialRouteName="login"
+          screenOptions={{
+            headerStyle: {
+              backgroundColor: "#4b150",
+            },
+            headerTintColor: "#fff",
+            headerTitleStyle: {
+              color: "#fff",
+            },
+            headerTitleAlign: "center"
+          }}
+          >
+            <Stack.Screen
+            name="login"
+            component={Login}
+            options={{ title: "UoV Student Care" }}
+            />
+            <Stack.Screen
+            name="home"
+            component={Home}
+            options={{ title: "UoV Student Care" }}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </PaperProvider>
+    </SafeAreaProvider>
   );
 }
 
